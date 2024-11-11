@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
 
+
 function App() {
     const [video, setVideo] = useState("");
     const [videoURL, setVideoURL] = useState("");
@@ -58,7 +59,6 @@ function App() {
                 </div>
             </div>
 
-
                     {selectedMovie && (
                 <div className="movie-popup">
                     <div className="movie-popup-content">
@@ -77,7 +77,9 @@ function App() {
                             </div>
                         )}
                     </div>
+                    
                 </div>
+                
             )}
         </div>
     );
