@@ -3,7 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #000000;
+    font-family: Helvetica, sans-serif;
 }
 .App {
     text-align: center;
@@ -38,7 +39,7 @@ body {
 }
 
 .movie {
-    background-color: white;
+    background-color: #000000;
     margin: 10px;
     padding: 15px;
     border-radius: 5px;
@@ -103,7 +104,7 @@ body {
 
 .movie-popup {
     position: sticky;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,7 +112,7 @@ body {
 }
 
 .movie-popup-content {
-    background-color: white;
+    background-color: #000000;
     padding: 20px;
     border-radius: 10px;
     width: 80%;

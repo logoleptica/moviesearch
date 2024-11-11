@@ -10,7 +10,7 @@ function App() {
     const [randomMovies, setRandomMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
+    const popularMovies = ["Snatch", "Devil's Advocate", "Children Of The Corn", "BeetleJuice", "It"];
 /*Getting movies from the api*/
     useEffect(() => {
         const fetchRandomMovies = async () => {
