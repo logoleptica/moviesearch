@@ -68,3 +68,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#This project will introduced us to API integration and working with external data in React. Built an application where users can search for movie titles, and the app will fetch and display corresponding trailers. This project helps people understand how to interact with APIs and handle asynchronous requests in React.
