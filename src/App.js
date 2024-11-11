@@ -10,7 +10,6 @@ function App() {
     const [randomMovies, setRandomMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
-    // List of random popular movie titles to display 
     const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
 
     useEffect(() => {
@@ -25,7 +24,6 @@ function App() {
         fetchRandomMovies();
     }, []);
 
-    // Handle movie click to show pop-up with details
     const handleMovieClick = async (movieTitle) => {
         try {
             const response = await axios.get(`http://www.omdbapi.com/?t=${movieTitle}&apikey=450e1265`);
@@ -47,7 +45,6 @@ function App() {
                 <button onClick={() => handleMovieClick(video)}>Search</button>
             </div>
 
-            //Random Movies Section 
             <div className="random-movies">
                 <h2>Popular Movies</h2>
                 <div className="movie-grid">
@@ -60,7 +57,6 @@ function App() {
                 </div>
             </div>
 
-            //Pop-up with Selected Movie Details 
 
             {selectedMovie && (
                 <div className="movie-popup">
