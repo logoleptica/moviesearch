@@ -11,7 +11,7 @@ function App() {
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
-
+/*Getting movies from the api*/
     useEffect(() => {
         const fetchRandomMovies = async () => {
             const promises = popularMovies.map(title =>
@@ -24,12 +24,13 @@ function App() {
         fetchRandomMovies();
     }, []);
 
+
     const handleMovieClick = async (movieTitle) => {
         try {
             const response = await axios.get(`http://www.omdbapi.com/?t=${movieTitle}&apikey=450e1265`);
             setSelectedMovie(response.data);
 
-            // Get trailer from URL for the selected movie
+            /* Error handling */
             const trailerURL = await movieTrailer(movieTitle);
             setVideoURL(trailerURL);
         } catch (error) {
@@ -58,7 +59,7 @@ function App() {
             </div>
 
 
-            {selectedMovie && (
+                    {selectedMovie && (
                 <div className="movie-popup">
                     <div className="movie-popup-content">
                         <button className="close-btn" onClick={() => setSelectedMovie(null)}>Close</button>
