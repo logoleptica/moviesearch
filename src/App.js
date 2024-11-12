@@ -4,12 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
-import NavBar from './components/NavBar'; // Import your NavBar component
-import SearchBox from './components/SearchBox'; // Import your SearchBox component
-import MovieDetails from './components/MovieDetails'; // Import your MovieDetails component
-import MoviePopup from './components/MoviePopup';
-import MainVideoPlayer from './components/MainVideoPlayer';
-import RandomMoviesSection from './components/RandomMoviesSection';
+import NavBar from './components/NavBar'; 
+import SearchBox from './components/SearchBox'; 
+import MovieDetails from './components/MovieDetails'; 
+import MoviePopup from './components/MoviePopup'; 
+import VideoCarousel from './components/VideoCarousel'; 
 
 function App() {
     const [video, setVideo] = useState(""); // State for search term
@@ -17,13 +16,13 @@ function App() {
     const [randomTrailerURL, setRandomTrailerURL] = useState("");
     const [randomMovies, setRandomMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    
     const api = "https://www.omdbapi.com/?";
     const apiKey = "450e1265"; // OMDB API key
 
     // List of popular movie titles to display randomly
     const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
 
-    // Fetch movies and randomly select one for the featured trailer on load
     useEffect(() => {
         const fetchRandomMovies = async () => {
             try {
@@ -32,9 +31,6 @@ function App() {
                 );
                 const results = await Promise.all(promises);
                 setRandomMovies(results.map(response => response.data));
-
-                // Randomly select one trailer for featured display
-                playRandomTrailer(results.map(response => response.data));
             } catch (error) {
                 console.error("Error fetching random movies:", error);
             }
@@ -42,17 +38,6 @@ function App() {
 
         fetchRandomMovies();
     }, []);
-
-    // Play a random trailer for the featured section
-    const playRandomTrailer = async (movies) => {
-        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-        try {
-            const trailerURL = await movieTrailer(randomMovie.Title);
-            setRandomTrailerURL(trailerURL);
-        } catch (error) {
-            console.error("Error fetching trailer:", error);
-        }
-    };
 
     // Handle movie click to show pop-up with details
     const handleMovieClick = async (movieTitle) => {
@@ -72,13 +57,39 @@ function App() {
         <Router>
             <div className="App">
                 <NavBar />
-                
-               
-                {/* Use the MainVideoPlayer component */}
-                <MainVideoPlayer randomTrailerURL={randomTrailerURL} />
+            
+                {/* Search Box Component */}
+                <SearchBox setVideo={setVideo} handleMovieClick={handleMovieClick} video={video} />
 
-                {/* Use the RandomMoviesSection component */}
-                <RandomMoviesSection randomMovies={randomMovies} handleMovieClick={handleMovieClick} />
+                {/* Video Carousel */}
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
+                     { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
+                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
+                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
+                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },]} />
+
+                {/* Main Video Player for Random Trailer */}
+                {randomTrailerURL && (
+                    <div className="main-video">
+                        <h2>Featured Trailer</h2>
+                        <div className="player-wrapper">
+                            <ReactPlayer url={randomTrailerURL} controls={true} width="100%" height="400px" />
+                        </div>
+                    </div>
+                )}
+
+                {/* Random Movies Section */}
+                <div className="random-movies">
+                    <h2>Popular Movies</h2>
+                    <div className="movie-grid">
+                        {randomMovies.map((movie) => (
+                            <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
+                                <img src={movie.Poster} alt={`${movie.Title} poster`} />
+                                <p>{movie.Title}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Pop-up with Selected Movie Details */}
                 {selectedMovie && (
@@ -89,6 +100,7 @@ function App() {
                     />
                 )}
             </div>
+
             {/* Define Routes */}
             <Routes>
                 <Route path="/movie/:title" element={<MovieDetails />} />
