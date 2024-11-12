@@ -1,15 +1,15 @@
-// components/MovieList.js
 import React from 'react';
 import MovieItem from './MovieItem';
 
-function MovieList({ movies }) {
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieItem key={movie.imdbID} movie={movie} />
-      ))}
-    </div>
-  );
-}
+const MovieList = ({ movies, handleMovieClick }) => {
+    return (
+        <div className="movie-grid">
+            {movies.map((movie) => (
+                <MovieItem key={movie.imdbID} movie={movie} 
+                onClick={handleMovieClick} />
+            ))}
+        </div>
+    );
+};
 
 export default MovieList;
