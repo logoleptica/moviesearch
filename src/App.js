@@ -4,34 +4,56 @@ import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
 
-
 function App() {
     const [video, setVideo] = useState("");
     const [videoURL, setVideoURL] = useState("");
+    const [randomTrailerURL, setRandomTrailerURL] = useState("");
     const [randomMovies, setRandomMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const api = "https://www.omdbapi.com/?";
+    const apiKey = "450e1265"; // OMDB API key
 
-    const popularMovies = ["Snatch", "Devil's Advocate", "Children Of The Corn", "BeetleJuice", "It"];
-/*Getting movies from the api*/
+    // List of popular movie titles to display randomly
+    const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
+
+    // Fetch movies and randomly select one for the featured trailer on load
     useEffect(() => {
         const fetchRandomMovies = async () => {
-            const promises = popularMovies.map(title =>
-                axios.get(`http://www.omdbapi.com/?t=${title}&apikey=450e1265`)
-            );
-            const results = await Promise.all(promises);
-            setRandomMovies(results.map(response => response.data));
+            try {
+                const promises = popularMovies.map(title =>
+                    axios.get(`${api}t=${title}&apikey=${apiKey}`)
+                );
+                const results = await Promise.all(promises);
+                setRandomMovies(results.map(response => response.data));
+
+                // Randomly select one trailer for featured display
+                playRandomTrailer(results.map(response => response.data));
+            } catch (error) {
+                console.error("Error fetching random movies:", error);
+            }
         };
 
         fetchRandomMovies();
     }, []);
 
+    // Play a random trailer for the featured section
+    const playRandomTrailer = async (movies) => {
+        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+        try {
+            const trailerURL = await movieTrailer(randomMovie.Title);
+            setRandomTrailerURL(trailerURL);
+        } catch (error) {
+            console.error("Error fetching trailer:", error);
+        }
+    };
 
+    // Handle movie click to show pop-up with details
     const handleMovieClick = async (movieTitle) => {
         try {
-            const response = await axios.get(`http://www.omdbapi.com/?t=${movieTitle}&apikey=450e1265`);
+            const response = await axios.get(`${api}t=${movieTitle}&apikey=${apiKey}`);
             setSelectedMovie(response.data);
 
-            /* Error handling */
+            // Get trailer URL specifically for the selected movie
             const trailerURL = await movieTrailer(movieTitle);
             setVideoURL(trailerURL);
         } catch (error) {
@@ -47,6 +69,18 @@ function App() {
                 <button onClick={() => handleMovieClick(video)}>Search</button>
             </div>
 
+            {/* Main Video Player for Random Trailer */}
+            {randomTrailerURL && (
+                <div className="main-video">
+                    <h2>Featured Trailer</h2>
+                <div className="player-wrapper">
+
+                    <ReactPlayer url={randomTrailerURL} controls={true} width="100%" height="400px" />
+                </div>
+                </div>
+            )}
+
+            {/* Random Movies Section */}
             <div className="random-movies">
                 <h2>Popular Movies</h2>
                 <div className="movie-grid">
@@ -59,7 +93,8 @@ function App() {
                 </div>
             </div>
 
-                    {selectedMovie && (
+            {/* Pop-up with Selected Movie Details */}
+            {selectedMovie && (
                 <div className="movie-popup">
                     <div className="movie-popup-content">
                         <button className="close-btn" onClick={() => setSelectedMovie(null)}>Close</button>
@@ -77,9 +112,7 @@ function App() {
                             </div>
                         )}
                     </div>
-                    
                 </div>
-                
             )}
         </div>
     );

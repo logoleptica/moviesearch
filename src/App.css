@@ -37,6 +37,25 @@ body {
     justify-content: center;
     padding: 20px;
 }
+.main-video {
+    margin-top: 20px;
+    text-align: center;
+}
+.player-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 80vw; /* Adjust width as needed */
+    padding: 20px;   /* Optional: Add padding around the player */
+}
+
+.react-player {
+    max-width: 100%; /* Makes the video responsive within the container */
+    width: 100%;
+    height: auto;
+}
 
 .movie {
     background-color: #000000;
@@ -115,9 +134,8 @@ body {
     background-color: #000000;
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     max-width: 600px;
-    position: relative;
 }
 
 .close-btn {
