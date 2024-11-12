@@ -1,0 +1,31 @@
+/* Navbar.css */
+
+.nav-container {
+    background-color: #333; /* Dark background for the navbar */
+    padding: 10px; /* Padding around the navbar */
+}
+
+.nav-content {
+    display: flex;
+    justify-content: center; /* Center the nav items */
+}
+
+.nav {
+    display: flex;
+    gap: 15px; /* Space between nav items */
+}
+
+.nav-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Text color */
+    border: none; /* Remove default button border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 16px; /* Font size */
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
