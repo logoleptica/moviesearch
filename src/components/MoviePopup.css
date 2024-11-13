@@ -1,0 +1,30 @@
+.movie-popup {
+    position: fixed; /* Fixed positioning to overlay */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 100; /* Ensure it is above other content */
+}
+
+.movie-popup-content {
+    background-color: rgb(65, 1, 1); /* Background color for popup content */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the popup */
+    max-width: 600px; /* Max width of the popup */
+    width: 90%; /* Responsive width */
+    max-height: 80vh; /* Max height of the popup (80% of viewport height) */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a slight shadow */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.close-btn {
+    cursor: pointer; /* Pointer cursor for close button */
+    float: right; /* Align close button to the right */
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; // Import CSS for styling
+import SearchBox from './SearchBox';
 
-const NavBar = () => {
+const NavBar = ({ setVideo, handleMovieClick }) => {
     return (
         <div className="nav-container">
             <div className="nav-content">
@@ -10,6 +11,8 @@ const NavBar = () => {
                     <Link to="/" className="nav-button">Home</Link>
                     <Link to="/genres" className="nav-button">Genres</Link>
                     <Link to="/signup" className="nav-button">Sign Up</Link>
+                    {/* Pass props to SearchBox */}
+                    <SearchBox setVideo={setVideo} handleMovieClick={handleMovieClick} />
                 </nav>
             </div>
         </div>

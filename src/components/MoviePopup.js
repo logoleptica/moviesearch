@@ -1,7 +1,6 @@
-// src/components/MoviePopup.js
-
 import React from 'react';
 import ReactPlayer from 'react-player';
+import './MoviePopup.css';
 
 const MoviePopup = ({ selectedMovie, videoURL, onClose }) => {
     if (!selectedMovie) return null; // Return null if no movie is selected

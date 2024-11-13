@@ -6,7 +6,11 @@ const RandomMoviesSection = ({ randomMovies, handleMovieClick }) => {
             <h2>Popular Movies</h2>
             <div className="movie-grid">
                 {randomMovies.map((movie) => (
-                    <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
+                    <div 
+                        key={movie.imdbID} 
+                        className="movie-item" 
+                        onClick={() => handleMovieClick(movie.Title)} // Ensure this is called
+                    >
                         <img src={movie.Poster} alt={`${movie.Title} poster`} />
                         <p>{movie.Title}</p>
                     </div>
