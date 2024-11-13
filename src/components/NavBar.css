@@ -1,0 +1,43 @@
+.nav-container {
+    background-color: #333; /* Background color for navbar */
+    padding: 10px; /* Padding around navbar */
+}
+
+.nav-content {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+
+.nav {
+    display: flex; /* Ensure nav items are in a single line */
+    align-items: center; /* Center items vertically */
+    flex-grow: 1; /* Allow nav items to take available space */
+}
+
+.nav-button {
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px 15px; /* Padding for buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-button:hover {
+    background-color: #555; /* Background color on hover */
+}
+
+
+/* Button styling */
+button[type="submit"] {
+    padding: 8px 12px; /* Padding for button */
+    margin-left: 5px; /* Space between input and button */
+    border-radius: 4px; /* Rounded corners for button */
+    border: none; /* Remove default border */
+    background-color: #555; /* Background color for button */
+    color: white; /* Text color for button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button[type="submit"]:hover {
+    background-color: #777; /* Darker background on hover */
+}

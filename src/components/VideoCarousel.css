@@ -1,0 +1,16 @@
+.video-carousel {
+    width: 100%;
+    margin: 0 auto; /* Center the carousel */
+}
+
+.video-slide {
+    display: flex; /* Center player within slide */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 50vh; /* Make the slide take half the viewport height */
+}
+
+.react-player {
+    width: 100%; /* Ensure player takes full width of the slide */
+    height: 100%; /* Ensure player takes full height of the slide */
+}
