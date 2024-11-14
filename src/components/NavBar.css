@@ -24,6 +24,9 @@
 
 .nav-button:hover {
     background-color: #555; /* Background color on hover */
+        cursor: pointer;
+    /* other styling */
+    z-index: 1; /* Ensure the link is clickable and above other elements */
 }
 
 

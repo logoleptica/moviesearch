@@ -167,10 +167,7 @@ function App() {
                 )}
             </div>
 
-            {/* Define Routes */}
-            <Routes>
-                <Route path="/movie/:title" element={<MovieDetails />} />
-            </Routes>
+         
         </Router>
     );
 }
