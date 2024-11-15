@@ -1,31 +1,33 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import SearchBar from './components/SearchBar';
-import movieTrailer from 'movie-trailer';
 import axios from 'axios';
-import NavBar from './components/NavBar'; 
-import MoviePopup from './components/MoviePopup'; 
-import VideoCarousel from './components/VideoCarousel'; 
+import movieTrailer from 'movie-trailer';
+
+import NavBar from './components/NavBar';
+import SearchBar from './components/SearchBar';
+import MoviePopup from './components/MoviePopup';
+import VideoCarousel from './components/VideoCarousel';
+import HomePage from './components/pages/Home';
+import MovieDetailsPage from './components/MovieDetails';
 
 function App() {
     const [video, setVideo] = useState("Inception"); // Default video title
     const [videoURL, setVideoURL] = useState("");    // Trailer URL
     const [movieDetails, setMovieDetails] = useState({});
-    const [randomMovies, setRandomMovies] = useState([]);  // State for random movies
-    const [selectedMovie, setSelectedMovie] = useState(null); // Movie details for popup
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     const api = "https://www.omdbapi.com/?";
     const apiKey = "450e1265";
 
-    // Fetch movie details from OMDb API
+    // Function to fetch movie details
     const fetchMovieDetails = useCallback(async (title) => {
         try {
             const response = await axios.get(`${api}t=${title}&apikey=${apiKey}`);
             if (response.data && response.data.Response === "True") {
-                setMovieDetails(response.data); // Set the full movie details
-                fetchYouTubeTrailer(title); // Fetch YouTube trailer once we have the movie title
+                setMovieDetails(response.data); // Set movie details
+                fetchYouTubeTrailer(title); // Fetch trailer
             } else {
                 console.warn("No details found for this movie");
                 setMovieDetails({});
@@ -35,9 +37,9 @@ function App() {
         }
     }, []);
 
-    // Fetch trailer URL from YouTube API
+    // Function to fetch trailer from YouTube API or fallback to `movieTrailer`
     const fetchYouTubeTrailer = (title) => {
-        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Make sure this is set in your .env file
+        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Make sure to set in .env
         axios
             .get(`https://www.googleapis.com/youtube/v3/search`, {
                 params: {
@@ -51,97 +53,80 @@ function App() {
             .then((response) => {
                 if (response.data.items && response.data.items.length > 0) {
                     const trailerUrl = `https://www.youtube.com/watch?v=${response.data.items[0].id.videoId}`;
-                    setVideoURL(trailerUrl); // Set the trailer URL
+                    setVideoURL(trailerUrl); // Set trailer URL
                 } else {
                     console.warn("No trailer found in YouTube API. Using fallback.");
                     movieTrailer(title)
-                        .then((url) => {
-                            if (url) setVideoURL(url);
-                            else console.warn("No trailer found with fallback method either.");
-                        })
-                        .catch((error) => {
-                            console.error("Error with fallback movieTrailer search:", error);
-                        });
+                        .then((url) => setVideoURL(url || ""))
+                        .catch((error) => console.error("Fallback trailer search error:", error));
                 }
             })
-            .catch((error) => {
-                console.error("Error fetching YouTube trailer:", error.response || error);
-            });
+            .catch((error) => console.error("Error fetching YouTube trailer:", error));
     };
 
-    // Fetch random movies (for example, 5 random popular movies)
-    const fetchRandomMovies = async () => {
-        try {
-            const response = await axios.get(`https://www.omdbapi.com/?s=batman&apikey=${apiKey}`);  // Replace with actual API for random movies
-            if (response.data.Response === "True") {
-                setRandomMovies(response.data.Search); // Set random movie list
-            }
-        } catch (error) {
-            console.error("Error fetching random movies:", error);
-        }
-    };
-
-    // Handle Search (called from SearchBar)
+    // Handle movie search
     const handleSearch = (title) => {
-        setVideo(title); // Update the video title
-        fetchMovieDetails(title); // Fetch movie details and trailer
+        setVideo(title); // Update video title
+        fetchMovieDetails(title); // Fetch details and trailer
     };
 
-    // Handle movie click to show detailed information in a popup
+    // Handle movie click to show popup and trailer
     const handleMovieClick = async (movieTitle) => {
-        try {
-            await fetchMovieDetails(movieTitle);
-            setSelectedMovie(movieDetails);
-        } catch (error) {
-            console.error("Error fetching movie details:", error);
-        }
+        await fetchMovieDetails(movieTitle);
+        setSelectedMovie(movieDetails);
     };
 
-    // Close the popup
-    const closePopup = () => {
-        setSelectedMovie(null);
-    };
-
-    useEffect(() => {
-        fetchRandomMovies(); // Fetch random movies when the app loads
-        fetchMovieDetails(video); // Initial fetch for default video
-    }, [fetchMovieDetails, video]);
+    // Close popup
+    const closePopup = () => setSelectedMovie(null);
 
     return (
         <Router>
             <div className="App">
-                <NavBar setVideo={setVideo} handleMovieClick={handleMovieClick} />
-                
-                <SearchBar onSearch={handleSearch} />
-
-                <h1>{movieDetails.Title}</h1>
-                <div>
-                    <p>Year: {movieDetails.Year}</p>
-                    <p>Rating: {movieDetails.imdbRating || 'N/A'}</p>
-                    <ReactPlayer url={videoURL} controls={true} />
-
-                    {/* Random Movies Section */}
-                    <div className="random-movies">
-                        <h2>Popular Movies</h2>
-                        <div className="movie-grid">
-                            {randomMovies.map((movie) => (
-                                <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
-                                    <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                                    <p>{movie.Title}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Pop-up with Selected Movie Details */}
-                    {selectedMovie && (
-                        <MoviePopup 
-                            selectedMovie={selectedMovie} 
-                            videoURL={videoURL} 
-                            onClose={closePopup} 
-                        />
-                    )}
+                {/* Navbar and SearchBar */}
+                <div className="header-container">
+                    <NavBar setVideo={setVideo} handleMovieClick={handleMovieClick} />
+                    <SearchBar onSearch={handleSearch} />
                 </div>
+
+                {/* Define Routes */}
+                <Routes>
+                    {/* Home Page Route */}
+                    <Route
+                        path="/"
+                        element={
+                            <HomePage
+                                videoURL={videoURL}
+                                onSearch={handleSearch}
+                                handleMovieClick={handleMovieClick}
+                            />
+                        }
+                    />
+
+                    {/* Movie Details Page */}
+                    <Route
+                        path="/movie/:title"
+                        element={
+                            <MovieDetailsPage
+                                fetchMovieDetails={fetchMovieDetails}
+                                selectedMovie={selectedMovie}
+                                videoURL={videoURL}
+                                onClose={closePopup}
+                            />
+                        }
+                    />
+                </Routes>
+
+                {/* Movie Popup */}
+                {selectedMovie && (
+                    <MoviePopup
+                        selectedMovie={selectedMovie}
+                        videoURL={videoURL}
+                        onClose={closePopup}
+                    />
+                )}
+
+                {/* Video Carousel */}
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=q_MaCi7i180' }]} />
             </div>
         </Router>
     );

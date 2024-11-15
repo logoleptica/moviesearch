@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import './SearchBar.css';
+import './SearchBox.css';
 
-function SearchBar({ onSearch }) {
+const SearchBar = ({ setVideo, handleMovieClick }) => {
   const [query, setQuery] = useState("");             // User input
   const [debouncedQuery, setDebouncedQuery] = useState(""); // Debounced query to trigger API
   const [suggestions, setSuggestions] = useState([]);  // Movie suggestions with ratings
@@ -12,11 +12,13 @@ function SearchBar({ onSearch }) {
 
   const debounceTimeout = 500; // 500ms delay for debouncing
 
+  // Debounce logic
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedQuery(query), debounceTimeout);
     return () => clearTimeout(timer); // Clear timer on each new keystroke
   }, [query]);
 
+  // Fetch movie suggestions
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (debouncedQuery.trim().length === 0) {
@@ -46,10 +48,10 @@ function SearchBar({ onSearch }) {
                 const details = detailsResponse.data;
                 return details.imdbRating
                   ? { ...movie, imdbRating: details.imdbRating }
-                  : null;  // Return null if rating is missing
+                  : null; // Return null if rating is missing
               } catch (detailsError) {
                 console.error(`Error fetching details for ${movie.Title}:`, detailsError);
-                return null;  // Return null if there’s an error fetching details
+                return null; // Return null if there’s an error fetching details
               }
             })
           );
@@ -72,31 +74,34 @@ function SearchBar({ onSearch }) {
     fetchSuggestions();
   }, [debouncedQuery]);
 
+  // Handle input change
   const handleInputChange = (e) => setQuery(e.target.value);
 
+  // Handle suggestion click
   const handleSuggestionClick = (title) => {
-    setQuery(title);  // Set the selected suggestion as the input query
-    onSearch(title);  // Trigger search action in App.js
-    setQuery(" ");
+    setQuery(title); // Set the selected suggestion as the input query
+    setVideo(title); // Update video title in parent
+    handleMovieClick(title); // Trigger search action in parent
+    setQuery(""); // Clear input
     setSuggestions([]); // Clear suggestions dropdown after selection
-    setError("");       // Clear error message after selection
+    setError(""); // Clear error message after selection
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-box">
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Enter movie title..."
+        placeholder="Search for a movie..."
       />
-      <button onClick={() => onSearch(query)}>Search</button>
+      <button onClick={() => setVideo(query)}>Search</button>
 
-      {isLoading && <div>Loading...</div>}
+      {/* Dropdown for suggestions */}
+      {isLoading && <div className="loading">Loading...</div>}
       {error && <div className="error-message">{error}</div>}
-
       {suggestions.length > 0 && (
-        <div className="suggestions">
+        <div className="suggestions-dropdown">
           {suggestions.map((movie) => (
             <div
               key={movie.imdbID}
@@ -119,6 +124,6 @@ function SearchBar({ onSearch }) {
       )}
     </div>
   );
-}
+};
 
 export default SearchBar;

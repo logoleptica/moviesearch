@@ -1,30 +1,63 @@
 .movie-popup {
-    position: fixed; /* Fixed positioning to overlay */
+    position: fixed;
+    /* Fixed to cover the screen */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Dark semi-transparent background */
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    z-index: 100; /* Ensure it is above other content */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* High z-index to overlay all content */
 }
 
 .movie-popup-content {
-    background-color: rgb(65, 1, 1); /* Background color for popup content */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Padding inside the popup */
-    max-width: 600px; /* Max width of the popup */
-    width: 90%; /* Responsive width */
-    max-height: 80vh; /* Max height of the popup (80% of viewport height) */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Add a slight shadow */
+    background-color: #222;
+    /* Slightly lighter black for contrast */
+    color: white;
+    /* Text color */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 20px;
+    /* Spacing inside */
+    max-width: 600px;
+    /* Maximum width for popup */
+    width: 90%;
+    /* Responsive width */
+    max-height: 80vh;
+    /* Limit height for overflow */
+    overflow-y: auto;
+    /* Enable scrolling for long content */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow */
     display: flex;
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
+    /* Vertical layout */
+    position: relative;
+    /* For positioning close button */
 }
 
 .close-btn {
-    cursor: pointer; /* Pointer cursor for close button */
-    float: right; /* Align close button to the right */
+    position: absolute;
+    /* Place button inside popup */
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    /* Distinctive color for close button */
+    color: white;
+    /* White text */
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+    /* Darker red on hover */
 }
