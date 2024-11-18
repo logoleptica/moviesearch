@@ -1,3 +1,6 @@
+.App {
+    text-align: center;
+}
 .carousel-container {
     display: flex;
     overflow-x: scroll;
@@ -22,13 +25,19 @@
 .carousel-item:hover {
     transform: scale(1.1);
 }
-/* Add this to your CSS file */
+
 .genres-container {
     padding: 20px;
 }
 
 .video-player {
     margin-bottom: 20px;
+    text-align: center;
+}
+.video-player h2 {
+    margin-bottom: 10px; /* Space below the heading */
+    width: 100%; /* Full width of the parent container */
+    text-align: center; /* Center text within h2 */
 }
 
 .poster-grid {
@@ -44,4 +53,22 @@
 
 .poster-slideshow h4 {
     margin-top: 20px;
+}
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.player-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Center video player horizontally */
+    align-items: center; /* Center video player vertically if needed */
+    margin: 0 auto;
+    max-width: 50%; /* Adjust width as needed */
+    padding: 20px;   /* Optional padding around the player */
+}
+
+.react-player {
+    width: 100% !important; /* Full width of the player wrapper */
+    height: auto !important;
+    max-height: 400px !important;
 }
