@@ -10,7 +10,7 @@ const NavBar = ({ setVideo, handleMovieClick }) => {
                 <nav className="nav">
                     <Link to="/" className="nav-button">Home</Link>
                     <Link to="/genres" className="nav-button">Genres</Link>
-                    <Link to="/Login" className="nav-button">Sign in</Link>
+                    <Link to="/signup" className="nav-button">Sign Up</Link>
                     {/* Pass props to SearchBox */}
                     <SearchBox setVideo={setVideo} handleMovieClick={handleMovieClick} />
                 </nav>

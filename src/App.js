@@ -9,8 +9,6 @@ import MovieDetails from './components/MovieDetails';
 import MoviePopup from './components/MoviePopup'; 
 import VideoCarousel from './components/VideoCarousel'; 
 
-
-
 function App() {
     const [video, setVideo] = useState("");
     const [videoURL, setVideoURL] = useState("");
@@ -71,7 +69,7 @@ function App() {
     };
 
     return (
-        
+        <Router>
             <div className="App">
              <div className="vignette"></div>
 
@@ -84,7 +82,7 @@ function App() {
                      { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
                      { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
                      { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },]} />
-                
+
                 {/* Main Video Player for Random Trailer */}
                 {randomTrailerURL && (
                     <div className="main-video">
@@ -107,7 +105,7 @@ function App() {
                         ))}
                     </div>
                 </div>
-                {/* Action Movies Section */}
+ {/* Action Movies Section */}
                 <div className="action-movies">
                     <h2>Action Movies</h2>
                     <div className="movie-grid">
@@ -169,11 +167,11 @@ function App() {
                 )}
             </div>
 
-            // {/* Define Routes */}
-            // <Routes>
-            //     <Route path="/movie/:title" element={<MovieDetails />} />
-            // </Routes>
-        
+            {/* Define Routes */}
+            <Routes>
+                <Route path="/movie/:title" element={<MovieDetails />} />
+            </Routes>
+        </Router>
     );
 }
 
