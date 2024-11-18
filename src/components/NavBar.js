@@ -116,11 +116,6 @@ const NavBar = ({ onSearch }) => {
                             onChange={handleInputChange}
                             placeholder="Enter movie title..."
                         />
-<<<<<<< Updated upstream
-
-=======
-                        <button onClick={() => onSearch(query)}>Search</button>
->>>>>>> Stashed changes
                         <button type="submit" onClick={() => onSearch(query)}>
                             Search
                         </button>
