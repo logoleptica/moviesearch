@@ -1,0 +1,47 @@
+.carousel-container {
+    display: flex;
+    overflow-x: scroll;
+    gap: 15px;
+    padding: 10px;
+    scroll-behavior: smooth;
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbars */
+}
+
+.carousel-item {
+    min-width: 200px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.carousel-item:hover {
+    transform: scale(1.1);
+}
+/* Add this to your CSS file */
+.genres-container {
+    padding: 20px;
+}
+
+.video-player {
+    margin-bottom: 20px;
+}
+
+.poster-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.poster-grid img {
+    width: 100px; /* Adjust size as needed */
+    margin: 5px;
+    cursor: pointer;
+}
+
+.poster-slideshow h4 {
+    margin-top: 20px;
+}
