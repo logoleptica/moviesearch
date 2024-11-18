@@ -2,12 +2,11 @@ import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import SearchBar from './components/SearchBar';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
-import NavBar from './components/NavBar'; 
-import MoviePopup from './components/MoviePopup'; 
-import VideoCarousel from './components/VideoCarousel'; 
+import NavBar from './components/NavBar';
+import MoviePopup from './components/MoviePopup';
+import VideoCarousel from './components/VideoCarousel';
 
 function App() {
     const [video, setVideo] = useState("Inception"); // Default video title
@@ -110,9 +109,7 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <NavBar setVideo={setVideo} handleMovieClick={handleMovieClick} />
-                
-                <SearchBar onSearch={handleSearch} />
+                <NavBar onSearch={handleSearch} />
 
                 <h1>{movieDetails.Title}</h1>
                 <div>
@@ -135,10 +132,10 @@ function App() {
 
                     {/* Pop-up with Selected Movie Details */}
                     {selectedMovie && (
-                        <MoviePopup 
-                            selectedMovie={selectedMovie} 
-                            videoURL={videoURL} 
-                            onClose={closePopup} 
+                        <MoviePopup
+                            selectedMovie={selectedMovie}
+                            videoURL={videoURL}
+                            onClose={closePopup}
                         />
                     )}
                 </div>
