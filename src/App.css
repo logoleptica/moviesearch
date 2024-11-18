@@ -30,7 +30,6 @@ body {
     border: none;
     cursor: pointer;
 }
-/* App.css */
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
@@ -50,15 +49,16 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    max-width: 80vw; /* Adjust width as needed */
+    max-width: 50%; /* Adjust width as needed */
     padding: 20px;   /* Optional: Add padding around the player */
 }
 
 .react-player {
-    max-width: 100%; /* Makes the video responsive within the container */
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
 }
+
 
 .movie {
     background-color: #000000;
