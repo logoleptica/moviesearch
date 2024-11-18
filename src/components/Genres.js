@@ -128,7 +128,7 @@ const warMovieTitles = [
             
 
                 {/* Video Carousel */}
-                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=vZvm0IaKA5I' },
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=fiyOyy_3k5E' },
                      { url: 'https://www.youtube.com/watch?v=z6f5sFf2YmQ&t=1s' } ,
                      { url: 'https://www.youtube.com/watch?v=3JpKnfkgFf4' },
                      { url: 'https://www.youtube.com/watch?v=lZybaHBvs4g' },
@@ -195,7 +195,7 @@ const warMovieTitles = [
                     </div>
                 </div>
  {/* Video Carousel */}
-                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=yRNwFx09GHE' },
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=I23EDubKvZU' },
                      { url: 'https://www.youtube.com/watch?v=rxRub3zSa9Q' } ,
                      { url: 'https://www.youtube.com/watch?v=Fg_bhwsRfOQ' },
                      { url: 'https://www.youtube.com/watch?v=MD7v0-igVIM' },
@@ -223,8 +223,6 @@ const warMovieTitles = [
                     />
                 )}
             </div>
-
-        
     );
 }
 
