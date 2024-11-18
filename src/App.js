@@ -79,7 +79,7 @@ function App() {
             
 
                 {/* Video Carousel */}
-                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=6vzAQoi607E' },
                      { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
                      { url: 'https://www.youtube.com/watch?v=_H1G9BsxhDw' },
                      { url: 'https://www.youtube.com/watch?v=zLCbQ9EQmO8' },
