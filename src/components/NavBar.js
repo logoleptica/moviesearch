@@ -116,7 +116,7 @@ const NavBar = ({ onSearch }) => {
                             onChange={handleInputChange}
                             placeholder="Enter movie title..."
                         />
-                        <button onClick={() => onSearch(query)}>Search</button>
+
                         <button type="submit" onClick={() => onSearch(query)}>
                             Search
                         </button>
