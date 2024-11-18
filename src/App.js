@@ -81,9 +81,9 @@ function App() {
                 {/* Video Carousel */}
                 <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
                      { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
-                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
-                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
-                     { url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },]} />
+                     { url: 'https://www.youtube.com/watch?v=_H1G9BsxhDw' },
+                     { url: 'https://www.youtube.com/watch?v=zLCbQ9EQmO8' },
+                     { url: 'https://www.youtube.com/watch?v=ORdhNaXSrGA' },]} />
                 
                 {/* Main Video Player for Random Trailer */}
                 {randomTrailerURL && (
