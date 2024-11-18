@@ -128,7 +128,7 @@ const warMovieTitles = [
             
 
                 {/* Video Carousel */}
-                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=vZvm0IaKA5I' },
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=zbuf3B6ZQ7M' },
                      { url: 'https://www.youtube.com/watch?v=z6f5sFf2YmQ&t=1s' } ,
                      { url: 'https://www.youtube.com/watch?v=3JpKnfkgFf4' },
                      { url: 'https://www.youtube.com/watch?v=lZybaHBvs4g' },
@@ -168,7 +168,13 @@ const warMovieTitles = [
                         ))}
                     </div>
                 </div>
-
+   {/* Video Carousel */}
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=I23EDubKvZU' },
+                     { url: 'https://www.youtube.com/watch?v=z6f5sFf2YmQ&t=1s' } ,
+                     { url: 'https://www.youtube.com/watch?v=3JpKnfkgFf4' },
+                     { url: 'https://www.youtube.com/watch?v=lZybaHBvs4g' },
+                     { url: 'https://www.youtube.com/watch?v=Nqwn5Y_Y4xs' },]} />
+                
                 {/* Drama Movies Section */}
                 <div className="drama-movies">
                     <h2>Drama Movies</h2>
