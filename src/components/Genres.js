@@ -1,10 +1,15 @@
 import React from "react";
+import NavBar from "./NavBar";
 
-const Genres = () => {
+const Genres = ({ setVideo, handleMovieClick }) => {
   return (
-    <div className="genres-container">
-      <p>Here we put genres</p>
-    </div>
+    <>
+      <NavBar setVideo={setVideo} handleMovieClick={handleMovieClick} />
+      <div className="genres-container">
+        <h2>Genres Page</h2>
+        <p>Explore movies by genre.</p>
+      </div>
+    </>
   );
 };
 
