@@ -1,226 +1,143 @@
 .nav-container {
     background-color: #333;
-    /* Dark navbar background */
-    color: white;
-    /* Text color */
-    padding: 1rem;
-    /* Spacing inside the navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
+    /* Background color for navbar */
+    padding: 10px;
+    /* Padding around navbar */
 }
 
 .nav-content {
     display: flex;
-    /* Flex layout for content alignment */
     justify-content: space-between;
-    /* Space between left and right content */
     align-items: center;
-    /* Center vertically */
 }
 
 .nav {
     display: flex;
-    /* Ensure items are in a row */
     align-items: center;
-    /* Center items vertically */
+    flex-grow: 1;
+    justify-content: space-between;
+    /* Space the nav buttons apart */
 }
 
 .nav-button {
     color: white;
-    /* Button text color */
+    /* Text color */
     text-decoration: none;
-    /* Remove underline */
-    margin-right: 1rem;
-    /* Space between buttons */
-    font-weight: bold;
-    /* Highlight buttons */
+    /* Remove underline from links */
     padding: 10px 15px;
-    /* Padding for better click area */
+    /* Padding for buttons */
     transition: background-color 0.3s;
-    /* Smooth hover effect */
+    /* Smooth transition for hover effect */
 }
 
 .nav-button:hover {
     background-color: #555;
-    /* Slightly lighter background on hover */
+    /* Background color on hover */
     cursor: pointer;
-    /* Pointer cursor for interaction */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the search bar in its container */
+    width: 50%;
+    /* Set a fixed width for the search bar (double in length) */
+    position: relative;
+    margin: 0 auto;
+    /* Ensure it's horizontally centered */
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+    /* Make input take full width of the bar */
+    padding: 10px 20px;
+    /* Padding inside the input */
+    border: 1px solid #ddd;
+    /* Light border around the input */
+    border-radius: 25px 0 0 25px;
+    /* Rounded left corners */
+    outline: none;
+    /* Remove focus outline */
+    font-size: 1rem;
+    /* Increase font size */
+    background-color: #f9f9f9;
+    /* Light background color */
 }
 
 button[type="submit"] {
-    padding: 8px 12px;
-    /* Padding for button size */
-    margin-left: 5px;
-    /* Spacing between input and button */
-    border-radius: 4px;
-    /* Rounded corners */
+    padding: 10px 15px;
+    /* Padding for button */
     border: none;
     /* Remove border */
     background-color: #555;
-    /* Button background color */
+    /* Background color for button */
     color: white;
-    /* Text color */
+    /* Text color for button */
+    border-radius: 0 25px 25px 0;
+    /* Rounded right corners */
     cursor: pointer;
-    /* Pointer cursor */
-    transition: background-color 0.3s;
-    /* Smooth hover effect */
+    /* Pointer cursor on hover */
+    font-size: 1rem;
+    /* Font size matching input */
 }
 
 button[type="submit"]:hover {
     background-color: #777;
-    /* Slightly lighter hover color */
+    /* Darker background on hover */
 }
 
-.search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 0.5rem 0;
-    /* Spacing for search bar */
-}
-
-.search-box input {
-    padding: 0.5rem;
-    /* Input padding */
-    border: none;
-    /* Remove border */
-    border-radius: 4px;
-    /* Rounded corners */
-    width: 100%;
-    /* Full width */
-}
-
-.search-box button {
-    margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.suggestions-dropdown {
+.suggestions {
     position: absolute;
-    /* Dropdown aligned to parent */
     top: 100%;
-    /* Below the input field */
     left: 0;
-    background: white;
-    /* White background for dropdown */
-    color: black;
-    border: 1px solid #ddd;
-    /* Subtle border */
-    border-radius: 4px;
-    /* Rounded edges */
     width: 100%;
-    /* Full width of parent */
-    max-height: 200px;
-    /* Limit height for scrolling */
+    /* Match the width of the search bar */
+    background-color: #f9f9f9;
+    /* Match the input background */
+    border: 1px solid #ddd;
+    /* Border matching the input field */
+    border-radius: 0 0 25px 25px;
+    /* Rounded bottom corners */
+    max-height: 300px;
     overflow-y: auto;
-    /* Scroll when content exceeds height */
     z-index: 10;
-    /* Ensure it's above other elements */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
 }
 
 .suggestion-item {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
-    /* Padding for better click area */
+    padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border-bottom: 1px solid #ddd;
 }
 
 .suggestion-item:hover {
     background-color: #f0f0f0;
-    /* Highlight item on hover */
 }
 
 .poster-image {
-    width: 40px;
-    /* Thumbnail size */
-    height: 60px;
-    margin-right: 10px;
-    /* Spacing between image and text */
+    width: 50px;
+    height: 75px;
     border-radius: 4px;
-    /* Rounded image corners */
+    margin-right: 10px;
+}
+
+.suggestion-details {
+    display: flex;
+    flex-direction: column;
 }
 
 .suggestion-details h4 {
     margin: 0;
-    font-size: 0.9rem;
-    /* Slightly smaller title font */
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .suggestion-details p {
-    margin: 0;
-    font-size: 0.8rem;
-    /* Smaller text for description */
-    color: gray;
-    /* Subtle text color */
-}
-
-MoviePopup CSS css Kopiera kod .movie-popup {
-    position: fixed;
-    /* Fixed to cover the screen */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    /* Dark semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    /* High z-index to overlay all content */
-}
-
-.movie-popup-content {
-    background-color: #222;
-    /* Slightly lighter black for contrast */
-    color: white;
-    /* Text color */
-    border-radius: 8px;
-    /* Rounded corners */
-    padding: 20px;
-    /* Spacing inside */
-    max-width: 600px;
-    /* Maximum width for popup */
-    width: 90%;
-    /* Responsive width */
-    max-height: 80vh;
-    /* Limit height for overflow */
-    overflow-y: auto;
-    /* Enable scrolling for long content */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    /* Subtle shadow */
-    display: flex;
-    flex-direction: column;
-    /* Vertical layout */
-    position: relative;
-    /* For positioning close button */
-}
-
-.close-btn {
-    position: absolute;
-    /* Place button inside popup */
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    /* Distinctive color for close button */
-    color: white;
-    /* White text */
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
+    margin: 4px 0 0;
     font-size: 0.9rem;
-    transition: background-color 0.3s;
-}
-
-.close-btn:hover {
-    background-color: darkred;
-    /* Darker red on hover */
+    color: #777;
 }
