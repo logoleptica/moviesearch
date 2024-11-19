@@ -8,6 +8,8 @@ import NavBar from './components/NavBar';
 import MoviePopup from './components/MoviePopup';
 import VideoCarousel from './components/VideoCarousel';
 
+
+
 function App() {
     const [video, setVideo] = useState("Inception"); // Default video title
     const [videoURL, setVideoURL] = useState("");    // Trailer URL
@@ -107,8 +109,10 @@ function App() {
     }, [fetchMovieDetails, video]);
 
     return (
-        <Router>
+        
             <div className="App">
+
+
                 <NavBar onSearch={handleSearch} />
 
                 <h1>{movieDetails.Title}</h1>
@@ -140,7 +144,7 @@ function App() {
                     )}
                 </div>
             </div>
-        </Router>
+
     );
 }
 

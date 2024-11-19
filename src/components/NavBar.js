@@ -99,6 +99,7 @@ const NavBar = ({ onSearch }) => {
         <div className="nav-container">
             <div className="nav-content">
                 <nav className="nav">
+
                     <Link to="/" className="nav-button">
                         Home
                     </Link>
