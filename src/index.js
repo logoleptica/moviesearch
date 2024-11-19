@@ -12,6 +12,8 @@ import {
 
 import Login from './components/Login';
 import Genres from './components/Genres';
+import Signup from './components/Signup';
+
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,16 @@ const router = createBrowserRouter([
     element: <App/>,
   },
   {
+    path: "/home", // Add this route
+    element: <App />,
+  },
+  {
     path: "Login",
     element: <Login/>,
+  },
+  {
+    path: "Signup",
+    element: <Signup/>,
   },
   {
     path: "Genres",

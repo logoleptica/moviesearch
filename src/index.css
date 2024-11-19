@@ -51,6 +51,7 @@ code {
 
 .input-box {
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .input-box input {
