@@ -3,7 +3,8 @@ import ReactPlayer from 'react-player';
 import './MoviePopup.css';
 
 const MoviePopup = ({ selectedMovie, videoURL, onClose }) => {
-    if (!selectedMovie) return null; // Return null if no movie is selected
+    console.log("MoviePopup props:", { selectedMovie, videoURL }); // Debug log
+    if (!selectedMovie) return null;
 
     return (
         <div className="movie-popup">

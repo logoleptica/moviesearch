@@ -1,0 +1,57 @@
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions {
+  position: absolute;
+  /* Positioned below input */
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  /* White dropdown background */
+  border: 1px solid #ddd;
+  /* Subtle border */
+  border-radius: 4px;
+  max-height: 300px;
+  /* Limit height for scrolling */
+  overflow-y: auto;
+  /* Enable scrolling */
+  z-index: 10;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid #ddd;
+  /* Dividers between items */
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+  /* Subtle hover highlight */
+}
+
+.poster-image {
+  width: 50px;
+  height: 75px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.suggestion-details h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.suggestion-details p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #777;
+  /* Subtle text color */
+}

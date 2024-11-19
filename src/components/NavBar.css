@@ -1,43 +1,143 @@
 .nav-container {
-    background-color: #333; /* Background color for navbar */
-    padding: 10px; /* Padding around navbar */
+    background-color: #333;
+    /* Background color for navbar */
+    padding: 10px;
+    /* Padding around navbar */
 }
 
 .nav-content {
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space between items */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav {
-    display: flex; /* Ensure nav items are in a single line */
-    align-items: center; /* Center items vertically */
-    flex-grow: 1; /* Allow nav items to take available space */
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+    /* Space the nav buttons apart */
 }
 
 .nav-button {
-    color: white; /* Text color */
-    text-decoration: none; /* Remove underline from links */
-    padding: 10px 15px; /* Padding for buttons */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    color: white;
+    /* Text color */
+    text-decoration: none;
+    /* Remove underline from links */
+    padding: 10px 15px;
+    /* Padding for buttons */
+    transition: background-color 0.3s;
+    /* Smooth transition for hover effect */
 }
 
 .nav-button:hover {
-    background-color: #555; /* Background color on hover */
+    background-color: #555;
+    /* Background color on hover */
+    cursor: pointer;
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the search bar in its container */
+    width: 50%;
+    /* Set a fixed width for the search bar (double in length) */
+    position: relative;
+    margin: 0 auto;
+    /* Ensure it's horizontally centered */
+}
 
-/* Button styling */
+.search-bar input[type="text"] {
+    width: 100%;
+    /* Make input take full width of the bar */
+    padding: 10px 20px;
+    /* Padding inside the input */
+    border: 1px solid #ddd;
+    /* Light border around the input */
+    border-radius: 25px 0 0 25px;
+    /* Rounded left corners */
+    outline: none;
+    /* Remove focus outline */
+    font-size: 1rem;
+    /* Increase font size */
+    background-color: #f9f9f9;
+    /* Light background color */
+}
+
 button[type="submit"] {
-    padding: 8px 12px; /* Padding for button */
-    margin-left: 5px; /* Space between input and button */
-    border-radius: 4px; /* Rounded corners for button */
-    border: none; /* Remove default border */
-    background-color: #555; /* Background color for button */
-    color: white; /* Text color for button */
-    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px 15px;
+    /* Padding for button */
+    border: none;
+    /* Remove border */
+    background-color: #555;
+    /* Background color for button */
+    color: white;
+    /* Text color for button */
+    border-radius: 0 25px 25px 0;
+    /* Rounded right corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 1rem;
+    /* Font size matching input */
 }
 
 button[type="submit"]:hover {
-    background-color: #777; /* Darker background on hover */
+    background-color: #777;
+    /* Darker background on hover */
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    /* Match the width of the search bar */
+    background-color: #f9f9f9;
+    /* Match the input background */
+    border: 1px solid #ddd;
+    /* Border matching the input field */
+    border-radius: 0 0 25px 25px;
+    /* Rounded bottom corners */
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.poster-image {
+    width: 50px;
+    height: 75px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.suggestion-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.suggestion-details h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.suggestion-details p {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #777;
 }
