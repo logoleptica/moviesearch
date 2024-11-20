@@ -13,12 +13,13 @@ import {
 import Login from './components/Login';
 import Genres from './components/Genres';
 import Signup from './components/Signup';
-
+import SearchResultsPage from './components/pages/SearchResultsPage';
+import NavBar from "./components/NavBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
   },
   {
     path: "/home", // Add this route
@@ -26,21 +27,25 @@ const router = createBrowserRouter([
   },
   {
     path: "Login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "Signup",
-    element: <Signup/>,
+    element: <Signup />,
   },
   {
     path: "Genres",
-    element: <Genres/>,
+    element: <Genres />,
+  },
+  {
+    path: "/search/:query",
+    element: <SearchResultsPage />
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router}/>
+  <RouterProvider router={router} />
 );
 
 // If you want to start measuring performance in your app, pass a function

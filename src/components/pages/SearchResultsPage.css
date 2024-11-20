@@ -1,0 +1,72 @@
+/* SearchResultsPage.css */
+
+.search-results-page {
+  padding: 0px;
+  margin: 0;
+}
+
+.movie-category {
+  margin-bottom: 40px;
+}
+
+.movie-category h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.movie-cards-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  flex-wrap: nowrap;
+  /* Prevent wrapping of cards */
+}
+
+.movie-card {
+  cursor: pointer;
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.movie-card-details {
+  padding: 10px;
+}
+
+.movie-card-details h4 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.movie-card-details p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* To make sure the content doesn't overflow the container */
+.movie-cards-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.movie-cards-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.movie-cards-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

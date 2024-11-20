@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./NavBar.css";
-//import "./SearchBar.css";
+import "./MoviePopup.js";
 
 const NavBar = ({ onSearch }) => {
     const [query, setQuery] = useState(""); // User input
@@ -11,8 +11,10 @@ const NavBar = ({ onSearch }) => {
     const [isLoading, setIsLoading] = useState(false); // Loading state for suggestions
     const [error, setError] = useState(""); // Error state if no results
     const cache = useRef({}); // Ref for caching previous search results
-
+    const searchBarRef = useRef(null); // Ref to detect clicks outside
     const debounceTimeout = 500; // 500ms delay for debouncing
+    const navigate = useNavigate(); // React Router navigation hook
+
 
     // Debounce user input
     useEffect(() => {
@@ -83,6 +85,14 @@ const NavBar = ({ onSearch }) => {
         fetchSuggestions();
     }, [debouncedQuery]);
 
+    // Search button onClick handler
+    const handleSearchClick = () => {
+        if (query.trim()) {
+            navigate(`/search/${query}`); // Navigate to SearchResultsPage with query
+            setQuery(""); // Clear search bar
+            setSuggestions([]); // Clear suggestions
+        }
+    };
     // Handle input changes
     const handleInputChange = (e) => setQuery(e.target.value);
 
@@ -95,11 +105,38 @@ const NavBar = ({ onSearch }) => {
         setError(""); // Clear error message
     };
 
+    // Close suggestions when clicking outside or pressing "Esc"
+    const closeSuggestions = () => {
+        setSuggestions([]);
+        setError("");
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (searchBarRef.current && !searchBarRef.current.contains(e.target)) {
+                closeSuggestions();
+            }
+        };
+
+        const handleEscKey = (e) => {
+            if (e.key === "Escape") {
+                closeSuggestions();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleEscKey);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscKey);
+        };
+    }, []);
+
     return (
         <div className="nav-container">
             <div className="nav-content">
                 <nav className="nav">
-
                     <Link to="/" className="nav-button">
                         Home
                     </Link>
@@ -110,14 +147,14 @@ const NavBar = ({ onSearch }) => {
                         Sign Up
                     </Link>
                     {/* Search Bar Section */}
-                    <div className="search-bar">
+                    <div className="search-bar" ref={searchBarRef}>
                         <input
                             type="text"
                             value={query}
                             onChange={handleInputChange}
                             placeholder="Enter movie title..."
                         />
-                        <button type="submit" onClick={() => onSearch(query)}>
+                        <button type="submit" onClick={() => handleSearchClick(query)}>
                             Search
                         </button>
 

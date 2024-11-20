@@ -1,13 +1,11 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
 import NavBar from './components/NavBar';
 import MoviePopup from './components/MoviePopup';
-import VideoCarousel from './components/VideoCarousel';
-
 
 
 function App() {
@@ -40,7 +38,7 @@ function App() {
     const fetchYouTubeTrailer = (title) => {
         const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Make sure this is set in your .env file
         axios
-            .get(`https://www.googleapis.com/youtube/v3/search`, {
+            .get("https://www.googleapis.com/youtube/v3/search", {
                 params: {
                     part: "snippet",
                     q: `${title} trailer`,
@@ -82,7 +80,7 @@ function App() {
         }
     };
 
-    // Handle Search (called from SearchBar)
+    // Handle Search (called from SearchBar in NavBar)
     const handleSearch = (title) => {
         setVideo(title); // Update the video title
         fetchMovieDetails(title); // Fetch movie details and trailer
@@ -109,41 +107,38 @@ function App() {
     }, [fetchMovieDetails, video]);
 
     return (
-        
-            <div className="App">
+        <div className="App">
+            <NavBar onSearch={handleSearch} />
 
+            <h1>{movieDetails.Title}</h1>
+            <div>
+                <p>Year: {movieDetails.Year}</p>
+                <p>Rating: {movieDetails.imdbRating || 'N/A'}</p>
+                <ReactPlayer url={videoURL} controls={true} />
 
-                <NavBar onSearch={handleSearch} />
-
-                <h1>{movieDetails.Title}</h1>
-                <div>
-                    <p>Year: {movieDetails.Year}</p>
-                    <p>Rating: {movieDetails.imdbRating || 'N/A'}</p>
-                    <ReactPlayer url={videoURL} controls={true} />
-
-                    {/* Random Movies Section */}
-                    <div className="random-movies">
-                        <h2>Popular Movies</h2>
-                        <div className="movie-grid">
-                            {randomMovies.map((movie) => (
-                                <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
-                                    <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                                    <p>{movie.Title}</p>
-                                </div>
-                            ))}
-                        </div>
+                {/* Random Movies Section */}
+                <div className="random-movies">
+                    <h2>Popular Movies</h2>
+                    <div className="movie-grid">
+                        {randomMovies.map((movie) => (
+                            <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
+                                <img src={movie.Poster} alt={`${movie.Title} poster`} />
+                                <p>{movie.Title}</p>
+                            </div>
+                        ))}
                     </div>
-
-                    {/* Pop-up with Selected Movie Details */}
-                    {selectedMovie && (
-                        <MoviePopup
-                            selectedMovie={selectedMovie}
-                            videoURL={videoURL}
-                            onClose={closePopup}
-                        />
-                    )}
                 </div>
+
+                {/* Pop-up with Selected Movie Details */}
+                {selectedMovie && (
+                    <MoviePopup
+                        selectedMovie={selectedMovie}
+                        videoURL={videoURL}
+                        onClose={closePopup}
+                    />
+                )}
             </div>
+        </div>
 
     );
 }

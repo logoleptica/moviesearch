@@ -1,116 +1,105 @@
 .nav-container {
     background-color: #333;
-    /* Background color for navbar */
     padding: 10px;
-    /* Padding around navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-content {
     display: flex;
+    flex-grow: 1;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav {
     display: flex;
     align-items: center;
-    flex-grow: 1;
-    justify-content: space-between;
-    /* Space the nav buttons apart */
 }
 
 .nav-button {
     color: white;
-    /* Text color */
     text-decoration: none;
-    /* Remove underline from links */
     padding: 10px 15px;
-    /* Padding for buttons */
     transition: background-color 0.3s;
-    /* Smooth transition for hover effect */
 }
 
 .nav-button:hover {
     background-color: #555;
-    /* Background color on hover */
     cursor: pointer;
 }
 
 .search-bar {
+    position: absolute;
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* Adjust for actual center */
+    width: 25%;
+    /* Reduced to half of original size */
+    min-width: 200px;
+    /* Ensures adaptability to smaller screens */
+    max-width: 400px;
+    /* Prevents it from becoming too wide */
     display: flex;
+    /* Apply flexbox */
     align-items: center;
-    justify-content: center;
-    /* Center the search bar in its container */
-    width: 50%;
-    /* Set a fixed width for the search bar (double in length) */
-    position: relative;
-    margin: 0 auto;
-    /* Ensure it's horizontally centered */
+    /* Align vertically */
 }
 
+/* Input field styling */
 .search-bar input[type="text"] {
     width: 100%;
-    /* Make input take full width of the bar */
-    padding: 10px 20px;
-    /* Padding inside the input */
+    /* Take up full width of the search bar */
+    padding: 8px 15px;
     border: 1px solid #ddd;
-    /* Light border around the input */
     border-radius: 25px 0 0 25px;
-    /* Rounded left corners */
-    outline: none;
-    /* Remove focus outline */
-    font-size: 1rem;
-    /* Increase font size */
+    font-size: 0.9rem;
     background-color: #f9f9f9;
-    /* Light background color */
 }
 
+/* Submit button styling */
 button[type="submit"] {
-    padding: 10px 15px;
-    /* Padding for button */
-    border: none;
-    /* Remove border */
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
     background-color: #555;
-    /* Background color for button */
     color: white;
-    /* Text color for button */
     border-radius: 0 25px 25px 0;
-    /* Rounded right corners */
     cursor: pointer;
-    /* Pointer cursor on hover */
-    font-size: 1rem;
-    /* Font size matching input */
+    margin-left: 4px;
+    /* Small gap between the input and button */
 }
 
 button[type="submit"]:hover {
     background-color: #777;
-    /* Darker background on hover */
 }
 
+/* Suggestions dropdown */
 .suggestions {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    /* Match the width of the search bar */
-    background-color: #f9f9f9;
-    /* Match the input background */
+    background-color: white;
     border: 1px solid #ddd;
-    /* Border matching the input field */
-    border-radius: 0 0 25px 25px;
-    /* Rounded bottom corners */
+    border-radius: 4px;
     max-height: 300px;
     overflow-y: auto;
     z-index: 10;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
 }
 
 .suggestion-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
     border-bottom: 1px solid #ddd;
 }
 
@@ -118,6 +107,7 @@ button[type="submit"]:hover {
     background-color: #f0f0f0;
 }
 
+/* Styling for the poster */
 .poster-image {
     width: 50px;
     height: 75px;
@@ -125,19 +115,24 @@ button[type="submit"]:hover {
     margin-right: 10px;
 }
 
+/* Details alignment */
 .suggestion-details {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    /* Aligns text to the left */
 }
 
 .suggestion-details h4 {
     margin: 0;
     font-size: 1rem;
     font-weight: bold;
+    color: #1d1d1d;
 }
 
 .suggestion-details p {
     margin: 4px 0 0;
+    /* Space between lines */
     font-size: 0.9rem;
     color: #777;
 }
