@@ -1,30 +1,28 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import movieTrailer from 'movie-trailer';
 import axios from 'axios';
 import NavBar from './components/NavBar';
 import MoviePopup from './components/MoviePopup';
-
+import VideoCarousel from './components/VideoCarousel';
 
 function App() {
-    const [video, setVideo] = useState("Inception"); // Default video title
-    const [videoURL, setVideoURL] = useState("");    // Trailer URL
+    const [video, setVideo] = useState("Inception");
+    const [videoURL, setVideoURL] = useState("");
     const [movieDetails, setMovieDetails] = useState({});
-    const [randomMovies, setRandomMovies] = useState([]);  // State for random movies
-    const [selectedMovie, setSelectedMovie] = useState(null); // Movie details for popup
-
+    const [randomMovies, setRandomMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
     const api = "https://www.omdbapi.com/?";
     const apiKey = "450e1265";
 
-    // Fetch movie details from OMDb API
     const fetchMovieDetails = useCallback(async (title) => {
         try {
             const response = await axios.get(`${api}t=${title}&apikey=${apiKey}`);
             if (response.data && response.data.Response === "True") {
-                setMovieDetails(response.data); // Set the full movie details
-                fetchYouTubeTrailer(title); // Fetch YouTube trailer once we have the movie title
+                setMovieDetails(response.data);
+                fetchYouTubeTrailer(title);
+                return response.data; // Return the response data
             } else {
                 console.warn("No details found for this movie");
                 setMovieDetails({});
@@ -34,110 +32,88 @@ function App() {
         }
     }, []);
 
-    // Fetch trailer URL from YouTube API
     const fetchYouTubeTrailer = (title) => {
-        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY; // Make sure this is set in your .env file
-        axios
-            .get("https://www.googleapis.com/youtube/v3/search", {
-                params: {
-                    part: "snippet",
-                    q: `${title} trailer`,
-                    type: "video",
-                    videoEmbeddable: "true",
-                    key: API_KEY,
-                },
-            })
-            .then((response) => {
-                if (response.data.items && response.data.items.length > 0) {
-                    const trailerUrl = `https://www.youtube.com/watch?v=${response.data.items[0].id.videoId}`;
-                    setVideoURL(trailerUrl); // Set the trailer URL
-                } else {
-                    console.warn("No trailer found in YouTube API. Using fallback.");
-                    movieTrailer(title)
-                        .then((url) => {
-                            if (url) setVideoURL(url);
-                            else console.warn("No trailer found with fallback method either.");
-                        })
-                        .catch((error) => {
-                            console.error("Error with fallback movieTrailer search:", error);
-                        });
-                }
-            })
-            .catch((error) => {
-                console.error("Error fetching YouTube trailer:", error.response || error);
-            });
+        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+        axios.get("https://www.googleapis.com/youtube/v3/search", {
+            params: {
+                part: "snippet",
+                q: `${title} trailer`,
+                type: "video",
+                videoEmbeddable: "true",
+                key: API_KEY,
+            },
+        })
+        .then((response) => {
+            if (response.data.items && response.data.items.length > 0) {
+                const trailerUrl = `https://www.youtube.com/watch?v=${response.data.items[0].id.videoId}`;
+                setVideoURL(trailerUrl);
+            } else {
+                console.warn("No trailer found in YouTube API. Using fallback.");
+                movieTrailer(title)
+                    .then((url) => {
+                        if (url) setVideoURL(url);
+                        else console.warn("No trailer found with fallback method either.");
+                    })
+                    .catch((error) => {
+                        console.error("Error with fallback movieTrailer search:", error);
+                    });
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching YouTube trailer:", error.response || error);
+        });
     };
 
-    // Fetch random movies (for example, 5 random popular movies)
     const fetchRandomMovies = async () => {
         try {
-            const response = await axios.get(`https://www.omdbapi.com/?s=batman&apikey=${apiKey}`);  // Replace with actual API for random movies
+            const response = await axios.get(`https://www.omdbapi.com/?s=batman&apikey=${apiKey}`);
             if (response.data.Response === "True") {
-                setRandomMovies(response.data.Search); // Set random movie list
+                setRandomMovies(response.data.Search);
             }
         } catch (error) {
             console.error("Error fetching random movies:", error);
         }
     };
 
-    // Handle Search (called from SearchBar in NavBar)
     const handleSearch = (title) => {
-        setVideo(title); // Update the video title
-        fetchMovieDetails(title); // Fetch movie details and trailer
+        setVideo(title);
+        fetchMovieDetails(title);
     };
 
-    // Handle movie click to show detailed information in a popup
     const handleMovieClick = async (movieTitle) => {
         try {
-            await fetchMovieDetails(movieTitle);
-            setSelectedMovie(movieDetails);
+            const movieData = await fetchMovieDetails(movieTitle); // Fetch movie details
+            setSelectedMovie(movieData); // Use fetched data directly
         } catch (error) {
             console.error("Error fetching movie details:", error);
         }
     };
 
-    // Close the popup
     const closePopup = () => {
         setSelectedMovie(null);
     };
 
     useEffect(() => {
-        fetchRandomMovies(); // Fetch random movies when the app loads
-        fetchMovieDetails(video); // Initial fetch for default video
+        fetchRandomMovies();
+        fetchMovieDetails(video);
     }, [fetchMovieDetails, video]);
 
     return (
-
         <div className="App">
             <NavBar onSearch={handleSearch} />
-
             <h1>{movieDetails.Title}</h1>
             <div>
                 <p>Year: {movieDetails.Year}</p>
                 <p>Rating: {movieDetails.imdbRating || 'N/A'}</p>
-                <ReactPlayer url={videoURL} controls={true} />
-        
-     
-             <div className="vignette"></div>            
-
+                {videoURL && <ReactPlayer url={videoURL} controls={true} />}
+                
                 {/* Video Carousel */}
                 <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=6vzAQoi607E' },
-                     { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
-                     { url: 'https://www.youtube.com/watch?v=_H1G9BsxhDw' },
-                     { url: 'https://www.youtube.com/watch?v=zLCbQ9EQmO8' },
-                     { url: 'https://www.youtube.com/watch?v=ORdhNaXSrGA' },]} />
+                    { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' },
+                    { url: 'https://www.youtube.com/watch?v=_H1G9BsxhDw' },
+                    { url: 'https://www.youtube.com/watch?v=zLCbQ9EQmO8' },
+                    { url: 'https://www.youtube.com/watch?v=ORdhNaXSrGA' },]} />
                 
-                {/* Main Video Player for Random Trailer */}
-                {randomTrailerURL && (
-                    <div className="main-video">
-                        <h2>Featured Trailer</h2>
-                        <div className="player-wrapper">
-                            <ReactPlayer url={randomTrailerURL} controls={true} width="100%" height="400px" />
-                        </div>
-                    </div>
-                )}
-
-
                 {/* Random Movies Section */}
                 <div className="random-movies">
                     <h2>Popular Movies</h2>
@@ -161,7 +137,6 @@ function App() {
                 )}
             </div>
         </div>
-
     );
 }
 

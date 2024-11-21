@@ -58,10 +58,6 @@ body {
     height: auto;
 }
 
-    max-width: 50%; /* Adjust width as needed */
-    padding: 20px;   /* Optional: Add padding around the player */
-}
-
 .react-player {
     width: 100% !important;
     height: auto !important;
