@@ -158,7 +158,7 @@ const NavBar = ({ onSearch }) => {
                             Search
                         </button>
 
-                        {isLoading && <div>Loading...</div>}
+                        {isLoading}
                         {error && <div className="error-message">{error}</div>}
 
                         {suggestions.length > 0 && (
