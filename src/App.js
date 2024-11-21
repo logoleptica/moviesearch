@@ -107,6 +107,7 @@ function App() {
     }, [fetchMovieDetails, video]);
 
     return (
+
         <div className="App">
             <NavBar onSearch={handleSearch} />
 
@@ -115,6 +116,27 @@ function App() {
                 <p>Year: {movieDetails.Year}</p>
                 <p>Rating: {movieDetails.imdbRating || 'N/A'}</p>
                 <ReactPlayer url={videoURL} controls={true} />
+        
+     
+             <div className="vignette"></div>            
+
+                {/* Video Carousel */}
+                <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=6vzAQoi607E' },
+                     { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
+                     { url: 'https://www.youtube.com/watch?v=_H1G9BsxhDw' },
+                     { url: 'https://www.youtube.com/watch?v=zLCbQ9EQmO8' },
+                     { url: 'https://www.youtube.com/watch?v=ORdhNaXSrGA' },]} />
+                
+                {/* Main Video Player for Random Trailer */}
+                {randomTrailerURL && (
+                    <div className="main-video">
+                        <h2>Featured Trailer</h2>
+                        <div className="player-wrapper">
+                            <ReactPlayer url={randomTrailerURL} controls={true} width="100%" height="400px" />
+                        </div>
+                    </div>
+                )}
+
 
                 {/* Random Movies Section */}
                 <div className="random-movies">
