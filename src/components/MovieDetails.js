@@ -1,50 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import ReactPlayer from 'react-player';
-import movieTrailer from 'movie-trailer';
+import { useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
-    const { title } = useParams();
-    const [movieData, setMovieData] = useState(null);
-    const [trailerURL, setTrailerURL] = useState("");
+  const { imdbID } = useParams(); // Get imdbID from the URL
+  const [movieDetails, setMovieDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchMovieDetails = async () => {
-            try {
-                const response = await axios.get(`https://www.omdbapi.com/?t=${title}&apikey=450e1265`);
-                setMovieData(response.data);
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.omdbapi.com/?i=${imdbID}&apikey=450e1265`
+        );
+        setMovieDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching movie details', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                // Get trailer URL
-                const trailerURL = await movieTrailer(title);
-                setTrailerURL(trailerURL);
-            } catch (error) {
-                console.error("Error fetching movie details:", error);
-            }
-        };
+    fetchMovieDetails();
+  }, [imdbID]);
 
-        fetchMovieDetails();
-    }, [title]);
+  if (loading) return <p>Loading...</p>;
 
-    if (!movieData) return <div>Loading...</div>;
+  if (!movieDetails) return <p>Movie not found.</p>;
 
-    return (
-        <div className="movie-details">
-            <h1>{movieData.Title}</h1>
-            <p><strong>Year:</strong> {movieData.Year}</p>
-            <p><strong>Genre:</strong> {movieData.Genre}</p>
-            <p><strong>Runtime:</strong> {movieData.Runtime}</p>
-            <p><strong>Plot:</strong> {movieData.Plot}</p>
-            <p><strong>Cast:</strong> {movieData.Actors}</p>
-            <img src={movieData.Poster} alt={`${movieData.Title} poster`} />
-            {trailerURL && (
-                <div className="video-player">
-                    <h2>Trailer</h2>
-                    <ReactPlayer url={trailerURL} controls={true} />
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div className="movie-details">
+      <h2>{movieDetails.Title}</h2>
+      <img src={movieDetails.Poster} alt={movieDetails.Title} />
+      <p>{movieDetails.Plot}</p>
+      <p>Released: {movieDetails.Released}</p>
+      <p>Rating: {movieDetails.imdbRating}</p>
+      {/* Add more details as needed */}
+    </div>
+  );
 };
 
 export default MovieDetails;
