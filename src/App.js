@@ -49,6 +49,7 @@ function App() {
             console.error("Error fetching movies:", error);
         }
     };
+    
 
     useEffect(() => {
         // Fetch each genre's movie list
@@ -172,6 +173,7 @@ function App() {
 
         
     );
+    
 }
 
 export default App;
