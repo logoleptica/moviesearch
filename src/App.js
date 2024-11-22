@@ -23,7 +23,7 @@ function App() {
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     const api = "https://www.omdbapi.com/?";
-    const apiKey = "450e1265";
+    const apiKey = "26d352e";
 
     const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
     const actionMovieTitles = ["Mad Max: Fury Road", "John Wick", "Die Hard",
