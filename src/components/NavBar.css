@@ -1,6 +1,6 @@
 /* Navbar container */
 .nav-container {
-    background-color: #333; /* Background color for navbar */
+    background-color: #180000; /* Background color for navbar */
     padding: 10px; /* Padding around navbar */
     width: 100%;
 }
@@ -41,7 +41,7 @@
 }
 
 .sign-in a {
-    color: white;
+    color: rgb(57, 57, 57);
     text-decoration: none;
     padding: 10px 15px;
     background-color: #212121;
@@ -74,11 +74,11 @@ button[type="submit"] {
     margin-left: 5px; /* Space between input and button */
     border-radius: 4px; /* Rounded corners for button */
     border: none; /* Remove default border */
-    background-color: #212121; /* Background color for button */
-    color: white; /* Text color for button */
+    background-color: #180000; /* Background color for button */
+    color: rgb(77, 74, 74); /* Text color for button */
     cursor: pointer; /* Pointer cursor on hover */
 }
 
 button[type="submit"]:hover {
-    background-color: #777; /* Darker background on hover */
+    background-color: #180000; /* Darker background on hover */
 }
