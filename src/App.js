@@ -8,7 +8,7 @@ import NavBar from './components/NavBar';
 import MovieDetails from './components/MovieDetails'; 
 import MoviePopup from './components/MoviePopup'; 
 import VideoCarousel from './components/VideoCarousel'; 
-
+import SearchBox from './components/SearchBox';
 
 
 function App() {
@@ -27,16 +27,16 @@ function App() {
 
     const popularMovies = ["Inception", "Titanic", "Avatar", "The Matrix", "Interstellar"];
     const actionMovieTitles = ["Mad Max: Fury Road", "John Wick", "Die Hard",
-        "The Dark Knight", "Romeo Must Die", "12 Monkeys", "Heat", "Terminator 2", "Bullet"
+        "The Dark Knight", "Romeo Must Die", "12 Monkeys", "Heat"
     ];
     const dramaMovieTitles = ["The Shawshank Redemption", "Forrest Gump", "The Godfather",
-        "The Hateful Eight", "City of God", "Parasite", "12 Angry Men", "Four Brothers", "Stepmom"
+        "The Hateful Eight", "City of God", "Parasite", "12 Angry Men"
     ];
     const comedyMovieTitles = ["Superbad", "Step Brothers", "The Hangover", "Step Brothers",
-        "The Hangover", "Wedding Crashers", "White Chicks", "Horrible Bosses", "The Other Guys"
+        "The Hangover", "Wedding Crashers", "White Chicks"
     ];
     const warMovieTitles = ["Saving Private Ryan", "1917", "Full Metal Jacket", "American Sniper", 
-        "Tears of the Sun", "Black Hawk Down", "The Platoon", "Zero Dark Thirty", "Blitz"];
+        "Tears of the Sun", "Black Hawk Down", "The Platoon"];
 
     const fetchMovies = async (titles, setter) => {
         try {
@@ -76,8 +76,7 @@ function App() {
              <div className="vignette"></div>
 
                 <NavBar setVideo={setVideo} handleMovieClick={handleMovieClick} />
-            
-
+ 
                 {/* Video Carousel */}
                 <VideoCarousel videos={[{ url: 'https://www.youtube.com/watch?v=q_MaCi7i180' },
                      { url: 'https://www.youtube.com/watch?v=uUKhg_VG_Es' } ,
@@ -98,13 +97,19 @@ function App() {
                 {/* Random Movies Section */}
                 <div className="random-movies">
                     <h2>Popular Movies</h2>
+                               
+ {/* Pass props to SearchBox */}
+ 
+                    <SearchBox setVideo={setVideo} handleMovieClick={handleMovieClick} />
                     <div className="movie-grid">
                         {randomMovies.map((movie) => (
                             <div key={movie.imdbID} className="movie-item" onClick={() => handleMovieClick(movie.Title)}>
                                 <img src={movie.Poster} alt={`${movie.Title} poster`} />
                                 <p>{movie.Title}</p>
                             </div>
+                            
                         ))}
+                        
                     </div>
                 </div>
                 {/* Action Movies Section */}

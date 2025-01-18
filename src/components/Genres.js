@@ -30,10 +30,8 @@ function Genres () {
     "Black Panther", 
     "Frozen II", 
     "Spider-Man: No Way Home", 
-    "The Lion King", 
     "Joker", 
     "Avengers: Endgame", 
-    "Top Gun: Maverick", 
     "Dune"
 ];
 
@@ -45,8 +43,7 @@ const actionMovieTitles = [
     "Kill Bill: Vol. 1", 
     "Atomic Blonde", 
     "The Bourne Ultimatum", 
-    "300", 
-    "Spider-Man: Into the Spider-Verse"
+  
 ];
 
 const dramaMovieTitles = [
@@ -57,8 +54,7 @@ const dramaMovieTitles = [
     "La La Land", 
     "Moonlight", 
     "There Will Be Blood", 
-    "Spotlight", 
-    "The King's Speech"
+ 
 ];
 
 const comedyMovieTitles = [
@@ -69,8 +65,7 @@ const comedyMovieTitles = [
     "Knives Out", 
     "Ferris Bueller's Day Off", 
     "Zombieland", 
-    "The Grand Budapest Hotel", 
-    "Shrek"
+  
 ];
 
 const warMovieTitles = [
@@ -81,8 +76,7 @@ const warMovieTitles = [
     "Enemy at the Gates", 
     "Paths of Glory", 
     "Patton", 
-    "Apocalypse Now", 
-    "Midway"
+   
 ];
 
     const fetchMovies = async (titles, setter) => {

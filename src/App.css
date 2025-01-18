@@ -1,11 +1,12 @@
-/* src/App.css */
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #000000;
-    font-family: Helvetica, sans-serif;
+    background-color: #000;
+    color: white;
 }
+
 .App {
     text-align: center;
 }
@@ -17,33 +18,12 @@ body {
     text-align: center;
 }
 
-.App input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.App button {
-    padding: 10px 20px;
-    background-color: #2b5835;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-/* App.css */
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
-
-#results {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-}
+/* Main Video Player */
 .main-video {
     margin-top: 20px;
     text-align: center;
 }
+
 .player-wrapper {
     position: relative;
     display: flex;
@@ -51,66 +31,29 @@ body {
     align-items: center;
     margin: 0 auto;
     max-width: 80vw; /* Adjust width as needed */
-    padding: 20px;   /* Optional: Add padding around the player */
+    padding: 20px;
 }
 
 .react-player {
-    max-width: 100%; /* Makes the video responsive within the container */
     width: 100%;
+    max-width: 800px; /* Limit the width */
     height: auto;
 }
 
-.movie {
-    background-color: #000000;
-    margin: 10px;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    justify-content: center;
-}
-
-.movie-details img {
-    max-width: 200px;
-    margin-top: 10px;
-}
-.search-box {
-    margin: 20px;
-}
-.video-player {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px; /* Adjust as needed */
-    width: 100%; /* Full width of parent container */
-    text-align: center;
-  }
-
-.video-player h2 {
-    margin-bottom: 10px;
-}
-
-.video-player .react-player {
-    max-width: 100%; /* Responsive */
-    width: 640px; /* Set a max width to prevent it from getting too large */
-    height: auto;
-}
-.random-movies {
-    margin-top: 40px;
-}
-
+/* Movie Grid */
 .movie-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding: 20px;
 }
 
 .movie-item {
     cursor: pointer;
     width: 150px;
     text-align: center;
+    margin: 10px;
 }
 
 .movie-item img {
@@ -124,9 +67,14 @@ body {
     transform: scale(1.05);
 }
 
+/* Popup */
 .movie-popup {
-    position: sticky;
-    background-color: #000000;
+    position: fixed; /* Fix the popup at the center of the screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,13 +82,16 @@ body {
 }
 
 .movie-popup-content {
-    background-color: #000000;
+    background-color: #333;
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    max-width: 600px;
+    max-width: 900px; /* Ensure content is responsive */
+    max-height: 90vh; /* Make sure popup fits within the viewport */
+    overflow-y: auto; /* Enable scrolling if necessary */
 }
 
+/* Close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -153,34 +104,52 @@ body {
     border-radius: 5px;
 }
 
-
+/* Vignette (Dark Overlay) */
 .vignette {
-    position: fixed; /* Cover the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Allow clicks to pass through */
+    pointer-events: none;
     background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
-    z-index: 1; /* Ensure it is on top of other content */
+    z-index: 999; /* Overlay */
 }
 
-.movie-grid {
-    display: flex; /* Use flexbox for layout */
-    flex-wrap: wrap; /* Allow items to wrap */
+/* Video Player inside Movie Popup */
+.movie-popup-content .video-player {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.movie-item {
-    margin: 10px; /* Space between movie items */
-    cursor: pointer; /* Pointer cursor on hover */
+.movie-popup-content .video-player img {
+    max-width: 200px;
+    margin-right: 20px; /* Space between poster and video */
 }
 
-.movie-item img {
-    width: 150px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
+.movie-popup-content .video-player .react-player {
+    max-width: 60%; /* Video takes 60% of the available space */
+    height: auto;
 }
 
-.random-movies,
-.action-movies {
-    margin-top: 20px; /* Space between sections */
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .movie-popup-content {
+        max-width: 90%;
+    }
+
+    .movie-popup-content .video-player {
+        flex-direction: column;
+    }
+
+    .movie-popup-content .video-player img {
+        max-width: 100%; /* Scale image for mobile */
+        margin-bottom: 20px; /* Add space below poster */
+    }
+
+    .movie-popup-content .video-player .react-player {
+        max-width: 100%; /* Allow video to be responsive on smaller screens */
+    }
+    
 }

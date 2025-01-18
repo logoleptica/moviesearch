@@ -1,20 +1,27 @@
+/* Navbar container */
 .nav-container {
     background-color: #333; /* Background color for navbar */
     padding: 10px; /* Padding around navbar */
+    width: 100%;
 }
 
+/* Main content of the navbar, use flex to align items */
 .nav-content {
     display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space between items */
-    align-items: center; /* Center items vertically */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center items vertically */
 }
 
+/* Navigation section, center items horizontally */
 .nav {
     display: flex; /* Ensure nav items are in a single line */
-    align-items: center; /* Center items vertically */
-    flex-grow: 1; /* Allow nav items to take available space */
+    justify-content: center; /* Center the navigation items horizontally */
+    gap: 20px; /* Space between nav items */
+    margin-bottom: 10px; /* Space between nav and search bar */
 }
 
+/* Navigation button styling */
 .nav-button {
     color: white; /* Text color */
     text-decoration: none; /* Remove underline from links */
@@ -26,14 +33,48 @@
     background-color: #555; /* Background color on hover */
 }
 
+/* Sign In button aligned to the right */
+.sign-in {
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    width: 100%; /* Ensure it spans the full width */
+}
 
-/* Button styling */
+.sign-in a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #212121;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sign-in a:hover {
+    background-color: #777;
+}
+
+/* Search box styling */
+.search-box {
+    display: flex; /* Use flex to center the search bar */
+    justify-content: center; /* Center the search bar horizontally */
+    width: 100%; /* Ensure it takes full width */
+    margin-top: 10px; /* Space above search box */
+}
+
+input[type="text"] {
+    padding: 8px; /* Padding inside input field */
+    border-radius: 4px; /* Rounded corners for input field */
+    border: none; /* Remove default border */
+    width: 200px; /* Set a fixed width for the input */
+    font-size: 14px; /* Set font size */
+}
+
 button[type="submit"] {
     padding: 8px 12px; /* Padding for button */
     margin-left: 5px; /* Space between input and button */
     border-radius: 4px; /* Rounded corners for button */
     border: none; /* Remove default border */
-    background-color: #555; /* Background color for button */
+    background-color: #212121; /* Background color for button */
     color: white; /* Text color for button */
     cursor: pointer; /* Pointer cursor on hover */
 }

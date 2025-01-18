@@ -1,7 +1,18 @@
+/* Ensure the parent container uses flex to center contents */
+.header {
+    display: flex; /* Use flexbox to align items */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #333; /* Adjust the header background */
+}
+
 /* Ensure search box aligns inline with nav items */
 .search-box {
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically within search box */
+    justify-content: center; /* Center search box horizontally */
     margin-left: auto; /* Push search box to the far right */
 }
 
@@ -10,7 +21,8 @@ input[type="text"] {
     padding: 8px; /* Padding inside input field */
     border-radius: 4px; /* Rounded corners for input field */
     border: none; /* Remove default border */
-    width: 150px; /* Adjust width as needed */
+    width: 200px; /* Set a fixed width to make it consistent */
+    font-size: 14px; /* Set font size for input */
 }
 
 /* Button styling for submit button in search box */
@@ -22,8 +34,16 @@ button[type="submit"] {
     background-color: #361616; /* Background color for button */
     color: white; /* Text color for button */
     cursor: pointer; /* Pointer cursor on hover */
+    font-size: 14px; /* Set font size to match input field */
 }
 
 button[type="submit"]:hover {
     background-color: #777; /* Darker background on hover */
+}
+
+/* Optional: Additional media query to adjust for smaller screen sizes */
+@media (max-width: 768px) {
+    .search-box {
+        width: 80%; /* Reduce width on smaller screens */
+    }
 }
